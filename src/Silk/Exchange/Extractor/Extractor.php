@@ -7,7 +7,7 @@ use Silk\Configuration\PropertyConfiguration;
 /**
  * Class Extractor
  * Responsável por executar a extração dos dados do objeto.
- * @author  Lucas A. de Araújo <lucas@painapp.com.br>
+ * @author  Lucas A. de Araújo <lucas@minervasistemas.com.br>
  * @package Silk\Exchange\Extractor
  */
 class Extractor

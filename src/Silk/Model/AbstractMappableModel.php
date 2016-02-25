@@ -12,7 +12,7 @@ use Silk\Exchange\Populator\Populator;
 
 /**
  * Class AbstractMappableModel
- * @author  Lucas A. de Araújo <lucas@painapp.com.br>
+ * @author  Lucas A. de Araújo <lucas@minervasistemas.com.br>
  * @package Silk\Model
  */
 abstract class AbstractMappableModel implements MappableModelInterface
@@ -145,7 +145,7 @@ abstract class AbstractMappableModel implements MappableModelInterface
     {
         $resultSet = $this->tableGateway->select($where);
 
-        if($resultSet->count() == 0)
+        if($resultSet->count() === 0)
             throw new NoDataFoundException();
 
         $array = $resultSet->toArray()[0];

@@ -4,7 +4,7 @@ namespace Silk\Exceptions;
 
 /**
  * Class NoPrimaryKeyException
- * @author  Lucas A. de Araújo <lucas@painapp.com.br>
+ * @author  Lucas A. de Araújo <lucas@minervasistemas.com.br>
  */
 class NoPrimaryKeyException extends \Exception
 {

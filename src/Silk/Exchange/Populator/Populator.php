@@ -13,7 +13,7 @@ use Silk\Exceptions\NoDataFoundException;
  * os objetos com base nos valores recebidos do banco de dados,
  * e também com base nas configurações definidas para o objeto.
  *
- * @author  Lucas A. de Araújo <lucas@painapp.com.br>
+ * @author  Lucas A. de Araújo <lucas@minervasistemas.com.br>
  * @package Silk\Exchange\Populator
  */
 class Populator

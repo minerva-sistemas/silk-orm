@@ -9,7 +9,7 @@ use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 
 /**
  * Class TableGateway
- * @author  Lucas A. de Araújo <lucas@painapp.com.br>
+ * @author  Lucas A. de Araújo <lucas@minervasistemas.com.br>
  * @package Silk\Database
  */
 class TableGateway extends AbstractTableGateway

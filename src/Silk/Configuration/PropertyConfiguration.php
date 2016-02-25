@@ -12,7 +12,7 @@ use Silk\Model\MappableModelInterface;
  * de modo a permitir uma leitura simplificada de como um determinado código deve
  * operar sobre uma propriedade de acordo com os parâmetros estabelecidos.
  *
- * @author  Lucas A. de Araújo <lucas@painapp.com.br>
+ * @author  Lucas A. de Araújo <lucas@minervasistemas.com.br>
  * @package Silk\Configuration
  */
 class PropertyConfiguration
