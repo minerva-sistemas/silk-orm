@@ -187,7 +187,7 @@ abstract class AbstractMappableModel implements MappableModelInterface
         $table = new TableGateway(self::getInstance());
         $resultSet = $table->select($where);
 
-        if($resultSet->count() == 0)
+        if($resultSet->count() === 0)
             throw new NoDataFoundException();
 
         $list = new ArrayList();
