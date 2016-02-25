@@ -1,12 +1,12 @@
 {
-  "name": "hamboldt/silk-orm",
+  "name": "minerva-sistemas/silk-orm",
   "description": "Object Relational Mapper for zend-db",
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
     {
       "name": "Lucas A. de Araújo",
-      "email": "lucasdearaujo88@gmail.com"
+      "email": "lucas@minervasistemas.com.br"
     }
   ],
   "autoload":{
