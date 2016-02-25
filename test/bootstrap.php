@@ -11,10 +11,10 @@ use Zend\Db\Adapter\Adapter;
 GlobalAdapterFeature::setStaticAdapter(
     new Adapter(array(
             'driver'   => 'Mysqli',
-            'hostname' => 'localhost',
+            'hostname' => '192.168.33.13',
             'database' => 'silk',
             'username' => 'root',
-            'password' => null,
+            'password' => 'root',
             'charset'  => 'utf8',
             'options'  => array('buffer_results' => true)
         )
