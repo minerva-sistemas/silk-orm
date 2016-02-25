@@ -1,13 +1,13 @@
 # silk-orm
 
-[![License](https://poser.pugx.org/hamboldt/silk-orm/license)](https://packagist.org/packages/hamboldt/silk-orm) [![Build Status](https://scrutinizer-ci.com/g/hamboldt/silk-orm/badges/build.png?b=master)](https://scrutinizer-ci.com/g/hamboldt/silk-orm/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hamboldt/silk-orm/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hamboldt/silk-orm/?branch=master) [![Total Downloads](https://poser.pugx.org/hamboldt/silk-orm/downloads)](https://packagist.org/packages/hamboldt/silk-orm) [![Latest Stable Version](https://poser.pugx.org/hamboldt/silk-orm/v/stable)](https://packagist.org/packages/hamboldt/silk-orm) 
+[![License](https://poser.pugx.org/hamboldt/silk-orm/license)](https://packagist.org/packages/hamboldt/silk-orm) [![Build Status](https://scrutinizer-ci.com/g/minerva-sistemas/silk-orm/badges/build.png?b=master)](https://scrutinizer-ci.com/g/hamboldt/silk-orm/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/minerva-sistemas/silk-orm/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hamboldt/silk-orm/?branch=master) [![Total Downloads](https://poser.pugx.org/minerva-sistemas/silk-orm/downloads)](https://packagist.org/packages/hamboldt/silk-orm) [![Latest Stable Version](https://poser.pugx.org/minerva-sistemas/silk-orm/v/stable)](https://packagist.org/packages/hamboldt/silk-orm) 
 
 O ORM Silk (seda em inglês) é um sistema de mapeamento de objetos integrado com a estrutura do Zend Framework 2
 que foi pensado para ser prático, leve, e de fácil configuração. Ele permite transformar tabela em objetos e posteriormente
 acessar os dados utilizando o padrão de busca SQL do Zend. Em outras palavras, o papel dele é mapear seus objetos apenas
 em nível de arrays. Todo o resto fica com o Zend - transação de arrays com o banco de dados.
 
-`composer require hamboldt/silk-orm`
+`composer require minerva-sistemas/silk-orm`
 
 ### Como funciona
 
@@ -54,7 +54,7 @@ Quando o objeto é instanciado e não se passa nenhum valor no construtor como p
 
 ```php
 $company = new Company();
-$company->setName("Softwerk");
+$company->setName("Minerva Engenharia de Sistemas");
 $company->save();
 
 echo $company->getId(); // 1
@@ -67,14 +67,14 @@ Quando o objeto já possui uma id definida, e chamamos o método `save()`o regis
 ##### Instanciamento por chave primária
 ```php
 $company = new Company(1);
-$company->setName("Softwerk LTDA");
+$company->setName("Minerva");
 $company->save();
 ```
 
 ##### Instanciamento por array explicita
 ```php
 $company = new Company(['idcompany' => 1]);
-$company->setName("Softwerk LTDA");
+$company->setName("Minerva");
 $company->save();
 ```
 
@@ -84,7 +84,7 @@ $company = new Company(function(Select $select){
    $select->where->equalTo('idcompany', '1');
    $select->limit(1);
 });
-$company->setName("Softwerk LTDA");
+$company->setName("Minerva");
 $company->save();
 ```
 
@@ -92,8 +92,8 @@ $company->save();
 Atualiza todos os registros onde a coluna nome tiver o valor 'Softwerk'.
 
 ```php
-Company::select(['name' => 'Softwerk'])->map(function(Company $company){
-   $company->setName('The name has changed!');
+Company::select(['name' => 'Minerva'])->map(function(Company $company){
+   $company->setName('Minerva Engenharia de Sistemas');
    $company->save();
 });
 ```
@@ -103,7 +103,6 @@ Um objeto só será removido quando o sua id estiver definida, assim como nas op
 
 ```php
 $company = new Company(1);
-$company->setName("Softwerk LTDA");
 $company->delete();
 ```
 
@@ -111,7 +110,7 @@ $company->delete();
 Exemplo abaixo irá remover todos os objetos onde o valor da coluna `name` for igual a `Softwerk`.
 
 ```php
-Company::select(['name' => 'Softwerk'])->map(function(Company $company){
+Company::select(['name' => 'Minerva'])->map(function(Company $company){
    $company->delete();
 });
 ```
