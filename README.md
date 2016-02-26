@@ -1,4 +1,4 @@
-# ![](https://avatars3.githubusercontent.com/u/16104543?v=3&s=50) silk-orm
+# ![](http://i.imgur.com/k464Aw9.png)
 
 [![License](https://poser.pugx.org/hamboldt/silk-orm/license)](https://packagist.org/packages/hamboldt/silk-orm) [![Build Status](https://scrutinizer-ci.com/g/minerva-sistemas/silk-orm/badges/build.png?b=master)](https://scrutinizer-ci.com/g/minerva-sistemas/silk-orm/build-status/master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/minerva-sistemas/silk-orm/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/minerva-sistemas/silk-orm/?branch=master) [![Total Downloads](https://poser.pugx.org/minerva-sistemas/silk-orm/downloads)](https://packagist.org/packages/hamboldt/silk-orm) [![Latest Stable Version](https://poser.pugx.org/minerva-sistemas/silk-orm/v/stable)](https://packagist.org/packages/hamboldt/silk-orm) 
 
