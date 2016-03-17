@@ -11,12 +11,12 @@ use Silk\Model\AbstractMappableModel;
  * @configure {"table":"cad_company"}
  * @configure {"primary_key":"idcompany"}
  */
-class Company extends AbstractMappableModel
+class  Company extends AbstractMappableModel
 {
     /**
      * @var int
      */
-    private $idcompany;
+    protected $idcompany;
 
     /**
      * @var string
@@ -27,24 +27,6 @@ class Company extends AbstractMappableModel
      * @configure {"ignore":true}
      */
     private $ignored;
-
-    /**
-     * Retorna a id da compania
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->idcompany;
-    }
-
-    /**
-     * Define a id da compania
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->idcompany = $id;
-    }
 
     /**
      * Retorna o nome da compania

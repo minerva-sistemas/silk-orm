@@ -102,7 +102,9 @@ class PropertyConfiguration
         if ($this->value instanceof MappableModelInterface) {
             return $this->value->getId();
         }
-
+        else if($this->value instanceof \DateTime){
+            return $this->value->format('Y-m-d');
+        }
         return $this->value;
     }
 

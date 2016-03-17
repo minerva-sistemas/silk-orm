@@ -42,6 +42,12 @@ abstract class AbstractMappableModel implements MappableModelInterface
     private $lazy;
 
     /**
+     * @var bool
+     * @configure {"ignore":true}
+     */
+    private $extended;
+
+    /**
      * Verifica qual a estratégia de população adequada de
      * acordo com o parâmetro passado pelo usuário, e também
      * inicia as dependências da classe, bem como a definição
@@ -57,8 +63,8 @@ abstract class AbstractMappableModel implements MappableModelInterface
         // Define a chave primária do objeto
         $this->primaryKey = Reader::getConfig($this)['primary_key'];
 
-        // Constrói o objeto de acesso aos dados.
-        $this->tableGateway = new TableGateway($this);
+        // Define a tablegateway
+        $this->tableGateway = new TableGateway($this, Reader::getConfig($this)['table']);
 
         // Define o parâmetro de construção do objeto
         $this->where = $param;
@@ -86,6 +92,24 @@ abstract class AbstractMappableModel implements MappableModelInterface
         // Carrega o objeto se por lazy load
         if($this->lazy)
             $this->populate($this->where);
+    }
+
+    /**
+     * Retorna o valor da chave primária.
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->{$this->primaryKey};
+    }
+
+    /**
+     * Define o valor da chave primária.
+     * @param $id
+     */
+    public function setId($id)
+    {
+        $this->{$this->primaryKey} = $id;
     }
 
     /**
@@ -153,6 +177,12 @@ abstract class AbstractMappableModel implements MappableModelInterface
     }
 
     /**
+     * Método a ser executado antes de salvar o objeto.
+     * @return mixed
+     */
+    protected function beforeSave(){}
+
+    /**
      * Método responsável por salvar um objeto no banco de dados
      * verificando qual é a estratégia ideal. Se o objeto tiver
      * uma chave primária definida, ele será atualizado, caso não
@@ -160,11 +190,20 @@ abstract class AbstractMappableModel implements MappableModelInterface
      *
      * @return int
      */
-    public function save()
+    public function save($callBeforeSave = true)
     {
+        if($callBeforeSave) {
+            $this->beforeSave();
+            $this->tableGateway = new TableGateway($this, Reader::getConfig($this)['table']);
+        }
+        else
+        {
+            $this->tableGateway = new TableGateway($this, Reader::getConfig($this)['parent']);
+        }
+
         if(empty($this->getId()))
         {
-            return $this->insert();
+            return $this->insert($callBeforeSave);
         }
         else
         {
@@ -184,7 +223,7 @@ abstract class AbstractMappableModel implements MappableModelInterface
      */
     public static function select($where)
     {
-        $table = new TableGateway(self::getInstance());
+        $table = new TableGateway(self::getInstance(), Reader::getConfig(self::getInstance())['table']);
         $resultSet = $table->select($where);
 
         if($resultSet->count() === 0)
@@ -210,11 +249,15 @@ abstract class AbstractMappableModel implements MappableModelInterface
      *
      * @return int
      */
-    private function insert()
+    private function insert($parent = false)
     {
-        $result = $this->tableGateway->insert(Extractor::extract($this));
-        $this->setId($this->tableGateway->getLastInsertValue());
-        return $result;
+        $this->tableGateway->insert(Extractor::extract($this, $parent));
+        $id = $this->tableGateway->getLastInsertValue();
+
+        if($parent)
+            $this->setId($id);
+
+        return $id;
     }
 
     /**
@@ -227,9 +270,11 @@ abstract class AbstractMappableModel implements MappableModelInterface
      */
     private function update()
     {
-        return $this->tableGateway->update(Extractor::extract($this), [
+        $this->tableGateway->update(Extractor::extract($this), [
             $this->primaryKey => $this->getId()
         ]);
+
+        return $this->getId();
     }
 
     /**
@@ -241,6 +286,8 @@ abstract class AbstractMappableModel implements MappableModelInterface
      */
     public function delete()
     {
+        $this->tableGateway = new TableGateway($this);
+
         if(!empty($this->primaryKey))
         {
             return $this->tableGateway->delete([$this->primaryKey => $this->getId()]);

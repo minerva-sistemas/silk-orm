@@ -14,14 +14,26 @@ use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
  */
 class TableGateway extends AbstractTableGateway
 {
+    private $config;
+
     public function __construct($object)
     {
-        $config = Reader::getConfig($object);
+        $this->config = Reader::getConfig($object);
 
-        if (!array_key_exists('table', $config))
+        if (!array_key_exists('table', $this->config))
             throw new NoTableFoundException();
 
-        $this->table = $config['table'];
+        $this->table = $this->config['table'];
         $this->adapter = GlobalAdapterFeature::getStaticAdapter();
+
+        $this->updateContext();
+    }
+
+    protected function updateContext()
+    {
+        if(isset($this->config['schema'])){
+            $sql = 'USE ' . $this->config['schema'] . ';';
+            $this->adapter->getDriver()->getConnection()->execute($sql);
+        }
     }
 }
