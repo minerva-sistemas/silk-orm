@@ -19,6 +19,7 @@ em nível de arrays. Todo o resto fica com o Zend - transação de arrays com o 
 
 ##### Classes
 
+* `@configure {"schema":"Cadastro"}` - Especifica qual o schema da tabela, se em branco é adotado o schema padrão.
 * `@configure {"table":"table_name"}` - Especifica qual é a tabela do objeto no banco de dados.
 * `@configure {"primary_key":"idtable"}` - Especifica qual é a chave primária da tabela.
  
