@@ -4,6 +4,7 @@ namespace Silk\Database;
 
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 
 /**
  * AdapterPool
@@ -20,6 +21,15 @@ class AdapterPool
      */
     protected static $pool = [];
 
+    /**
+     * Construtor
+     */
+    public function __construct()
+    {
+        // Conexão com o MySQL
+        $this->add('Default', GlobalAdapterFeature::getStaticAdapter());
+    }
+    
     /**
      * @param $key
      * @param Adapter $adapter
