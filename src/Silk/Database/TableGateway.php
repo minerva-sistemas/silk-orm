@@ -16,7 +16,7 @@ class TableGateway extends AbstractTableGateway
 {
     private $config;
 
-    public function __construct($object)
+    public function __construct($object, $adapter = null)
     {
         $this->config = Reader::getConfig($object);
 
@@ -24,7 +24,11 @@ class TableGateway extends AbstractTableGateway
             throw new NoTableFoundException();
 
         $this->table = $this->config['table'];
-        $this->adapter = GlobalAdapterFeature::getStaticAdapter();
+        
+        if(!empty($adapter))
+            $this->adapter = $adapter;
+        else
+           $this->adapter = GlobalAdapterFeature::getStaticAdapter();
 
         $this->updateContext();
     }
