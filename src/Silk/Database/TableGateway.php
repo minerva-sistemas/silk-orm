@@ -6,6 +6,7 @@ use PhpDocReader\Reader;
 use Silk\Exceptions\NoTableFoundException;
 use Zend\Db\TableGateway\AbstractTableGateway;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
+use Silk\Database\AdapterPool;
 
 /**
  * Class TableGateway
@@ -16,7 +17,7 @@ class TableGateway extends AbstractTableGateway
 {
     private $config;
 
-    public function __construct($object, $adapter = null)
+    public function __construct($object)
     {
         $this->config = Reader::getConfig($object);
 
@@ -24,18 +25,21 @@ class TableGateway extends AbstractTableGateway
             throw new NoTableFoundException();
 
         $this->table = $this->config['table'];
+       
+        if(!isset($this->config['adapter']))
+            $this->config['adapter'] = 'Default';
         
-        if(!empty($adapter))
-            $this->adapter = $adapter;
-        else
-           $this->adapter = GlobalAdapterFeature::getStaticAdapter();
+        $adapterPool = new AdapterPool();
+        $this->adapter = $adapterPool->get($this->config['adapter']);
 
         $this->updateContext();
     }
 
     protected function updateContext()
     {
-        if(isset($this->config['schema'])){
+        $platform = $this->adapter->getPlatform()->getName();
+        
+        if(isset($this->config['schema']) && $platform == 'MySQL'){
             $sql = 'USE ' . $this->config['schema'] . ';';
             $this->adapter->getDriver()->getConnection()->execute($sql);
         }
