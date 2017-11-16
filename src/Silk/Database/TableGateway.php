@@ -43,5 +43,10 @@ class TableGateway extends AbstractTableGateway
             $sql = 'USE ' . $this->config['schema'] . ';';
             $this->adapter->getDriver()->getConnection()->execute($sql);
         }
+        
+        if(isset($this->config['schema']) && $platform == 'PostgreSQL'){
+            $sql = 'SET SCHEMA \'' . $this->config['schema'] . '\';';
+            $this->adapter->getDriver()->getConnection()->execute($sql);
+        }
     }
 }
