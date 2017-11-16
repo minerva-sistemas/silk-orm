@@ -3,7 +3,6 @@
 namespace Silk\Database;
 
 use Zend\Db\Adapter\Adapter;
-use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\TableGateway\Feature\GlobalAdapterFeature;
 
 /**
