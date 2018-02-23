@@ -2,7 +2,7 @@
 
 namespace Silk\Model;
 
-use Collections\ArrayList;
+use Collections\Vector;
 use PhpDocReader\Reader;
 use Silk\Database\TableGateway;
 use Silk\Exceptions\NoDataFoundException;
@@ -218,7 +218,7 @@ abstract class AbstractMappableModel implements MappableModelInterface
      * e em seguida popular ele e adicioná-lo na lista de dados.
      *
      * @param $where
-     * @return ArrayList
+     * @return Vector
      * @throws NoDataFoundException
      */
     public static function select($where)
@@ -229,7 +229,7 @@ abstract class AbstractMappableModel implements MappableModelInterface
         if($resultSet->count() === 0)
             throw new NoDataFoundException();
 
-        $list = new ArrayList();
+        $list = new Vector();
 
         foreach($resultSet->toArray() as $array)
         {
